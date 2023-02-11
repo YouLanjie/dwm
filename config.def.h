@@ -29,10 +29,10 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "uTools",   NULL,       NULL,       0,            1,           -1 },
 	{ "Fsearch",  NULL,       NULL,       0,            1,           -1 },
-	{ "qq.exe",   NULL,       NULL,       1 << 16,      1,           -1 },
+	{ "Wine",     NULL,       NULL,       1 << 16,      1,           -1 },
 	{ "bilibili", NULL,       NULL,       1 << 11,      1,           -1 },
 	{ "Steam",    NULL,       NULL,       1 << 13,      1,           -1 },
-	{ "Microsoft-edge", NULL, NULL,       1 << 1,       0,           -1 },
+	{ "Microsoft-edge", NULL, NULL,       1 << 0,       0,           -1 },
 	{ "Minecraft* 1.18.2", NULL, NULL,    1 << 15,      0,           -1 },
 	{ "netease-cloud-music", NULL, NULL,  1 << 12,      0,           -1 },
 	{ "plasma-systemmonitor", NULL, NULL, 1 << 9,      0,           -1 },
