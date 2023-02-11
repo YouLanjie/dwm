@@ -60,10 +60,19 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "rofi", "-show", "drun", NULL };
 static const char *termcmd[]  = { "konsole", NULL };
+
 static const char *local_screensnap[]  = { "spectacle", NULL };
+static const char *local_volume_up[]  = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
+static const char *local_volume_down[]  = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
+static const char *local_wallpaper[]  = { "feh", "--randomize", "--bg-fill", "~/图片/yuindex_bg/*", NULL };
+static const char *local_restart_picom[]  = { "killall", "picom", "&&", "sleep", "1", "&&", "picom", "-b", NULL };
 
 static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = local_screensnap } },
+	{ Mod1Mask,                     XK_f7,     spawn,          {.v = local_volume_down } },
+	{ Mod1Mask,                     XK_f8,     spawn,          {.v = local_volume_up } },
+	{ MODKEY|Mod1Mask|Ctrl,         XK_b,      spawn,          {.v = local_wallpaper } },
+	{ MODKEY|Mod1Mask|Ctrl,         XK_1,      spawn,          {.v = local_restart_picom } },
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
