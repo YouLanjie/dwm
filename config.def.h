@@ -20,11 +20,11 @@ static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_gray2, col_gray4  },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" };
+static const char *tags[] = { "edge", "2", "3", "4", "5", "6", "7", "8", "9", "系统监视器", "11", "Bilibili", "网易云音乐", "Steam", "HMCL", "Minecraft", "QQ" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -76,16 +76,16 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "rofi", "-show", "drun", NULL };
 static const char *termcmd[]  = { "konsole", NULL };
 
-static const char *local_screensnap[]  = { "spectacle", NULL };
-static const char *local_volume_up[]  = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
-static const char *local_volume_down[]  = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
-static const char *local_wallpaper[]  = { "feh", "--randomize", "--bg-fill", "~/图片/yuindex_bg/*", NULL };
 static const char *local_restart_picom[]  = { "killall", "picom", "&&", "sleep", "1", "&&", "picom", "-b", NULL };
-static const char *local_file[]  = { "dolphin", NULL };
-static const char *local_termcmd[]  = { "alacritty", "--class", "center-termux", NULL };
+static const char *local_screensnap[]  = { "spectacle", NULL };
+static const char *local_volume_up[]   = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
+static const char *local_volume_down[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
+static const char *local_wallpaper[]   = { "feh", "--randomize", "--bg-fill", "~/图片/yuindex_bg/*", NULL };
+static const char *local_file[]    = { "dolphin", NULL };
+static const char *local_termcmd[] = { "alacritty", "--class", "center-termux", NULL };
 static const char *local_editor[]  = { "emacs", "/home/youlanjie/.emacs.d/org-files/GTD.org", NULL };
-static const char *local_editor2[]  = { "alacritty", "--class", "editor-nvim", "-e", "nvim", "/tmp/tmpfile.txt", NULL };
-static const char *local_editor3[]  = { "emacs", "/tmp/tmpfile.org", NULL };
+static const char *local_editor2[] = { "alacritty", "--class", "editor-nvim", "-e", "nvim", "/tmp/tmpfile.txt", NULL };
+static const char *local_editor3[] = { "emacs", "/tmp/tmpfile.org", NULL };
 
 static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = local_screensnap } },
