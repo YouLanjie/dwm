@@ -29,14 +29,14 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "uTools",   NULL,       NULL,       0,            1,           -1 },
 	{ "Fsearch",  NULL,       NULL,       0,            1,           -1 },
-	{ "qq.exe",   NULL,       NULL,       1>>17,        1,           -1 },
-	{ "bilibili", NULL,       NULL,       1>>12<<17,    1,           -1 },
-	{ "Steam",    NULL,       NULL,       1>>14<<17,    1,           -1 },
-	{ "Microsoft-edge", NULL, NULL,       1<<17,        0,           -1 },
-	{ "Minecraft* 1.18.2", NULL, NULL,    1>>16<<17,    0,           -1 },
-	{ "netease-cloud-music", NULL, NULL,  1>>13<<17,    0,           -1 },
-	{ "plasma-systemmonitor", NULL, NULL, 1>>10<<17,    0,           -1 },
-	{ "org.jackhuang.hmcl.Launcher", NULL, NULL, 1>>15<<17, 0,       -1 },
+	{ "qq.exe",   NULL,       NULL,       1 << 16,      1,           -1 },
+	{ "bilibili", NULL,       NULL,       1 << 11,      1,           -1 },
+	{ "Steam",    NULL,       NULL,       1 << 13,      1,           -1 },
+	{ "Microsoft-edge", NULL, NULL,       1 << 1,       0,           -1 },
+	{ "Minecraft* 1.18.2", NULL, NULL,    1 << 15,      0,           -1 },
+	{ "netease-cloud-music", NULL, NULL,  1 << 12,      0,           -1 },
+	{ "plasma-systemmonitor", NULL, NULL, 1 << 9,      0,           -1 },
+	{ "org.jackhuang.hmcl.Launcher", NULL, NULL, 1<<14, 0,           -1 },
 	// { "Gimp",     NULL,       NULL,       0,            0,           -1 },
 	// { "Firefox",  NULL,       NULL,       0,            0,           -1 },
 };
@@ -117,14 +117,14 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	TAGKEYS(                        XK_F1,                    10)
-	TAGKEYS(                        XK_F2,                    11)
-	TAGKEYS(                        XK_F3,                    12)
-	TAGKEYS(                        XK_F4,                    13)
-	TAGKEYS(                        XK_F5,                    14)
-	TAGKEYS(                        XK_F6,                    15)
-	TAGKEYS(                        XK_F7,                    16)
-	TAGKEYS(                        XK_F8,                    17)
+	TAGKEYS(                        XK_F1,                     9)
+	TAGKEYS(                        XK_F2,                    10)
+	TAGKEYS(                        XK_F3,                    11)
+	TAGKEYS(                        XK_F4,                    12)
+	TAGKEYS(                        XK_F5,                    13)
+	TAGKEYS(                        XK_F6,                    14)
+	TAGKEYS(                        XK_F7,                    15)
+	TAGKEYS(                        XK_F8,                    16)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
