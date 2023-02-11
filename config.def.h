@@ -79,10 +79,10 @@ static const char *local_restart_picom[]  = { "killall", "picom", "&&", "sleep",
 
 static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = local_screensnap } },
-	{ Mod1Mask,                     XK_f7,     spawn,          {.v = local_volume_down } },
-	{ Mod1Mask,                     XK_f8,     spawn,          {.v = local_volume_up } },
-	{ MODKEY|Mod1Mask|Ctrl,         XK_b,      spawn,          {.v = local_wallpaper } },
-	{ MODKEY|Mod1Mask|Ctrl,         XK_1,      spawn,          {.v = local_restart_picom } },
+	{ Mod1Mask,                     XK_F7,     spawn,          {.v = local_volume_down } },
+	{ Mod1Mask,                     XK_F8,     spawn,          {.v = local_volume_up } },
+	{ MODKEY|Mod1Mask|ControlMask,  XK_b,      spawn,          {.v = local_wallpaper } },
+	{ MODKEY|Mod1Mask|ControlMask,  XK_1,      spawn,          {.v = local_restart_picom } },
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
@@ -117,14 +117,14 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	TAGKEYS(                        XK_f1,                    10)
-	TAGKEYS(                        XK_f2,                    11)
-	TAGKEYS(                        XK_f3,                    12)
-	TAGKEYS(                        XK_f4,                    13)
-	TAGKEYS(                        XK_f5,                    14)
-	TAGKEYS(                        XK_f6,                    15)
-	TAGKEYS(                        XK_f7,                    16)
-	TAGKEYS(                        XK_f8,                    17)
+	TAGKEYS(                        XK_F1,                    10)
+	TAGKEYS(                        XK_F2,                    11)
+	TAGKEYS(                        XK_F3,                    12)
+	TAGKEYS(                        XK_F4,                    13)
+	TAGKEYS(                        XK_F5,                    14)
+	TAGKEYS(                        XK_F6,                    15)
+	TAGKEYS(                        XK_F7,                    16)
+	TAGKEYS(                        XK_F8,                    17)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
