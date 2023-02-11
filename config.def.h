@@ -19,7 +19,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -27,8 +27,18 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "uTools",   NULL,       NULL,       0,            1,           -1 },
+	{ "Fsearch",  NULL,       NULL,       0,            1,           -1 },
+	{ "qq.exe",   NULL,       NULL,       17,           1,           -1 },
+	{ "bilibili", NULL,       NULL,       12,           1,           -1 },
+	{ "Steam",    NULL,       NULL,       14,           1,           -1 },
+	{ "Microsoft-edge", NULL, NULL,       1,            0,           -1 },
+	{ "Minecraft* 1.18.2", NULL, NULL,    16,           0,           -1 },
+	{ "netease-cloud-music", NULL, NULL,  13,           0,           -1 },
+	{ "plasma-systemmonitor", NULL, NULL, 10,           0,           -1 },
+	{ "org.jackhuang.hmcl.Launcher", NULL, NULL, 16,    0,           -1 },
+	// { "Gimp",     NULL,       NULL,       0,            0,           -1 },
+	// { "Firefox",  NULL,       NULL,       0,            0,           -1 },
 };
 
 /* layout(s) */
@@ -107,6 +117,14 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	TAGKEYS(                        XK_f1,                    10)
+	TAGKEYS(                        XK_f2,                    11)
+	TAGKEYS(                        XK_f3,                    12)
+	TAGKEYS(                        XK_f4,                    13)
+	TAGKEYS(                        XK_f5,                    14)
+	TAGKEYS(                        XK_f6,                    15)
+	TAGKEYS(                        XK_f7,                    16)
+	TAGKEYS(                        XK_f8,                    17)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
