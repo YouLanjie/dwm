@@ -81,6 +81,11 @@ static const char *local_volume_up[]  = { "pactl", "set-sink-volume", "@DEFAULT_
 static const char *local_volume_down[]  = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
 static const char *local_wallpaper[]  = { "feh", "--randomize", "--bg-fill", "~/图片/yuindex_bg/*", NULL };
 static const char *local_restart_picom[]  = { "killall", "picom", "&&", "sleep", "1", "&&", "picom", "-b", NULL };
+static const char *local_file[]  = { "dolphin", NULL };
+static const char *local_termcmd[]  = { "alacritty", "--class", "center-termux", NULL };
+static const char *local_editor[]  = { "emacs $HOME/.emacs.d/org-files/GTD.org", NULL };
+static const char *local_editor2[]  = { "alacritty", "--class", "editor-nvim", "-e", "nvim", "/tmp/tmpfile.txt", NULL };
+static const char *local_editor3[]  = { "emacs /tmp/tmpfile.org", NULL };
 
 static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = local_screensnap } },
@@ -88,6 +93,11 @@ static const Key keys[] = {
 	{ Mod1Mask,                     XK_F8,     spawn,          {.v = local_volume_up } },
 	{ MODKEY|Mod1Mask|ControlMask,  XK_b,      spawn,          {.v = local_wallpaper } },
 	{ MODKEY|Mod1Mask|ControlMask,  XK_1,      spawn,          {.v = local_restart_picom } },
+	{ MODKEY|ControlMask,           XK_Return, spawn,          {.v = local_file } },
+	{ Mod1Mask|ControlMask,         XK_Return, spawn,          {.v = local_termcmd } },
+	{ MODKEY                        XK_x,      spawn,          {.v = local_editor } },
+	{ MODKEY|ShiftMask              XK_z,      spawn,          {.v = local_editor2 } },
+	{ MODKEY                        XK_z,      spawn,          {.v = local_editor3 } },
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
