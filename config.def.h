@@ -83,9 +83,9 @@ static const char *local_wallpaper[]  = { "feh", "--randomize", "--bg-fill", "~/
 static const char *local_restart_picom[]  = { "killall", "picom", "&&", "sleep", "1", "&&", "picom", "-b", NULL };
 static const char *local_file[]  = { "dolphin", NULL };
 static const char *local_termcmd[]  = { "alacritty", "--class", "center-termux", NULL };
-static const char *local_editor[]  = { "emacs $HOME/.emacs.d/org-files/GTD.org", NULL };
+static const char *local_editor[]  = { "emacs", "/home/youlanjie/.emacs.d/org-files/GTD.org", NULL };
 static const char *local_editor2[]  = { "alacritty", "--class", "editor-nvim", "-e", "nvim", "/tmp/tmpfile.txt", NULL };
-static const char *local_editor3[]  = { "emacs /tmp/tmpfile.org", NULL };
+static const char *local_editor3[]  = { "emacs", "/tmp/tmpfile.org", NULL };
 
 static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = local_screensnap } },
@@ -95,9 +95,9 @@ static const Key keys[] = {
 	{ MODKEY|Mod1Mask|ControlMask,  XK_1,      spawn,          {.v = local_restart_picom } },
 	{ MODKEY|ControlMask,           XK_Return, spawn,          {.v = local_file } },
 	{ Mod1Mask|ControlMask,         XK_Return, spawn,          {.v = local_termcmd } },
-	{ MODKEY                        XK_x,      spawn,          {.v = local_editor } },
-	{ MODKEY|ShiftMask              XK_z,      spawn,          {.v = local_editor2 } },
-	{ MODKEY                        XK_z,      spawn,          {.v = local_editor3 } },
+	{ MODKEY,                       XK_x,      spawn,          {.v = local_editor } },
+	{ MODKEY,                       XK_z,      spawn,          {.v = local_editor3 } },
+	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = local_editor2 } },
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
