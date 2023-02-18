@@ -2637,10 +2637,10 @@ review(const Arg *arg)
 		if (selec_view != 0) {
 			selec_view--;
 		} else {
-			selec_view = 16;
+			selec_view = tagmax;
 		}
 	} else if (arg->i == 1) {
-		if (selec_view < 16) {
+		if (selec_view < tagmax) {
 			selec_view++;
 		} else {
 			selec_view = 0;

@@ -24,6 +24,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
+static const int tagmax = 16;
 static const char *tags[] = { "edge", "2", "3", "4", "5", "6", "7", "8", "9", "系统监视器", "11", "Bilibili", "网易云音乐", "Steam", "HMCL", "Minecraft", "QQ" };
 
 static const Rule rules[] = {
