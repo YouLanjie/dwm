@@ -273,6 +273,8 @@ static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
 static void view(const Arg *arg);
+static void getview(const Arg *arg);
+static void review(const Arg *arg);
 static Client *wintoclient(Window w);
 static Monitor *wintomon(Window w);
 static Client *wintosystrayicon(Window w);
@@ -291,7 +293,7 @@ static const char localshare[] = ".local/share";
 static char stext[256];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
-static int bh, blw = 0;      /* bar geometry */
+static int bh;               /* bar geometry */
 static int enablegaps = 1;   /* enables gaps, used by togglegaps */
 static int lrpad;            /* sum of left and right padding for text */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
@@ -321,6 +323,7 @@ static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
+static int selec_view;
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -2602,6 +2605,7 @@ updatewmhints(Client *c)
 void
 view(const Arg *arg)
 {
+	getview(arg);
 	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;
 	selmon->seltags ^= 1; /* toggle sel tagset */
@@ -2609,6 +2613,42 @@ view(const Arg *arg)
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
 	focus(NULL);
 	arrange(selmon);
+}
+
+void
+getview(const Arg *arg)
+{
+	unsigned int ui = arg->ui;
+	int i = 0;
+
+	for (i = 0; ui != 0; ui = ui << 1) {
+		i++;
+	}
+	i = 32 - i;
+	selec_view = i;
+	return;
+}
+
+void
+review(const Arg *arg)
+{
+	Arg arg2;
+	if (arg->i == 0) {
+		if (selec_view != 0) {
+			selec_view--;
+		} else {
+			selec_view = 16;
+		}
+	} else if (arg->i == 1) {
+		if (selec_view < 16) {
+			selec_view++;
+		} else {
+			selec_view = 0;
+		}
+	}
+	arg2.ui = 1 << selec_view;
+	view(&arg2);
+	return;
 }
 
 Client *
