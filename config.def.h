@@ -38,10 +38,11 @@ static const Rule rules[] = {
 	{ "Wine",     NULL,       NULL,       1 << 16,      1,           -1 },
 	{ "bilibili", NULL,       NULL,       1 << 11,      1,           -1 },
 	{ "Steam",    NULL,       NULL,       1 << 13,      1,           -1 },
+	{ "center-termux", NULL,  NULL,       0,            1,           -1 },
 	{ "Microsoft-edge", NULL, NULL,       1 << 0,       0,           -1 },
 	{ "Minecraft* 1.18.2", NULL, NULL,    1 << 15,      0,           -1 },
 	{ "netease-cloud-music", NULL, NULL,  1 << 12,      0,           -1 },
-	{ "plasma-systemmonitor", NULL, NULL, 1 << 9,      0,           -1 },
+	{ "plasma-systemmonitor", NULL, NULL, 1 << 9,       0,           -1 },
 	{ "org.jackhuang.hmcl.Launcher", NULL, NULL, 1<<14, 0,           -1 },
 	// { "Gimp",     NULL,       NULL,       0,            0,           -1 },
 	// { "Firefox",  NULL,       NULL,       0,            0,           -1 },
@@ -84,7 +85,7 @@ static const char *local_volume_down[] = { "pactl", "set-sink-volume", "@DEFAULT
 static const char *local_wallpaper[]   = { "feh", "--randomize", "--bg-fill", "~/图片/yuindex_bg/*", NULL };
 static const char *local_file[]    = { "dolphin", NULL };
 static const char *local_termcmd[] = { "alacritty", "--class", "center-termux", NULL };
-static const char *local_editor[]  = { "emacs", "/home/youlanjie/.emacs.d/org-files/GTD.org", NULL };
+static const char *local_editor[]  = { "emacs", "/home/Chglish/.emacs.d/org-files/GTD.org", NULL };
 static const char *local_editor2[] = { "alacritty", "--class", "editor-nvim", "-e", "nvim", "/tmp/tmpfile.txt", NULL };
 static const char *local_editor3[] = { "emacs", "/tmp/tmpfile.org", NULL };
 
@@ -95,10 +96,10 @@ static const Key keys[] = {
 	{ MODKEY|Mod1Mask|ControlMask,  XK_b,      spawn,          {.v = local_wallpaper } },
 	{ MODKEY|Mod1Mask|ControlMask,  XK_1,      spawn,          {.v = local_restart_picom } },
 	{ MODKEY|ControlMask,           XK_Return, spawn,          {.v = local_file } },
-	{ Mod1Mask|ControlMask,         XK_Return, spawn,          {.v = local_termcmd } },
 	{ MODKEY,                       XK_x,      spawn,          {.v = local_editor } },
 	{ MODKEY,                       XK_z,      spawn,          {.v = local_editor3 } },
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = local_editor2 } },
+	{ MODKEY|Mod1Mask,              XK_Return, spawn,          {.v = local_termcmd } },
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
