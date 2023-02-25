@@ -88,6 +88,8 @@ static const char *local_termcmd[] = { "alacritty", "--class", "center-termux", 
 static const char *local_editor[]  = { "emacs", "/home/Chglish/.emacs.d/org-files/GTD.org", NULL };
 static const char *local_editor2[] = { "alacritty", "--class", "editor-nvim", "-e", "nvim", "/tmp/tmpfile.txt", NULL };
 static const char *local_editor3[] = { "emacs", "/tmp/tmpfile.org", NULL };
+static const char *local_transset_1[] = { "transset-df", "0.9999999", NULL };
+static const char *local_transset_0[] = { "transset-df", "1", NULL };
 
 static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = local_screensnap } },
@@ -100,6 +102,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_z,      spawn,          {.v = local_editor3 } },
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = local_editor2 } },
 	{ MODKEY|Mod1Mask,              XK_Return, spawn,          {.v = local_termcmd } },
+	{ Mod1Mask,                     XK_F11,    spawn,          {.v = local_transset_0 } },
+	{ Mod1Mask,                     XK_F12,    spawn,          {.v = local_transset_1 } },
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
