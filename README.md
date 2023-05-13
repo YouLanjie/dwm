@@ -1,5 +1,7 @@
 # DWM YES
 
+> 注意：这是一个fork仓库
+
 dwm 是一个非常快速, 小巧并使用动态管理窗口的窗口管理器
 
 [展示视频: BV1Ef4y1Z7kA](https://www.bilibili.com/video/BV1Ef4y1Z7kA/)

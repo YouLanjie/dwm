@@ -44,7 +44,7 @@ static const unsigned int alphas[][3]    = {          /* 透明度设置 ColFg, 
 };
 
 /* 自定义脚本位置 */
-static const char *autostartscript = "$DWM/autostart.sh";
+static const char *autostartscript = "~/.local/share/dwm/autostart.sh";
 static const char *statusbarscript = "$DWM/statusbar/statusbar.sh";
 
 /* 自定义 scratchpad instance */
@@ -54,15 +54,21 @@ static const char scratchpadname[] = "scratchpad";
 /* 自定义特定实例的显示状态 */
 //            ﮸  ﭮ 切
 static const char *tags[] = { 
-    "", // tag:0  key:1  desc:terminal1
-    "", // tag:1  key:2  desc:terminal2
-    "", // tag:2  key:3  desc:terminal3
-    "󰕧", // tag:4  key:9  desc:obs
-    "", // tag:5  key:c  desc:chrome
-    "", // tag:6  key:m  desc:music
-    "ﬄ", // tag:7  key:0  desc:qq
-    "﬐", // tag:8  key:w  desc:wechat
-    "", // tag:9  key:l  desc:wxwork
+	"Term",
+	/* "", // tag:0  key:1  desc:terminal1 */
+	"", // tag:1  key:2  desc:terminal2
+	"", // tag:2  key:3  desc:terminal3
+	"", // tag:3  key:4  desc:terminal3
+	"", // tag:4  key:5  desc:terminal3
+	"", // tag:5  key:6  desc:terminal3
+	"", // tag:6  key:7  desc:terminal3
+	"", // tag:7  key:8  desc:terminal3
+	"󰕧", // tag:8  key:9  desc:obs
+	"", // tag:9  key:c  desc:edge
+	"", // tag:10  key:m  desc:music
+	"QQ", // tag:11  key:0  desc:qq
+	"﬐", // tag:12  key:b  desc:bilibili
+	"", // tag:13  key:l  desc:steam
 };
 
 /* 自定义窗口显示规则 */
@@ -74,45 +80,48 @@ static const char *tags[] = {
 /* monitor 定义符合该规则的窗口显示在哪个显示器上 -1 为当前屏幕 */
 /* floatposition 定义符合该规则的窗口显示的位置 0 中间，1到9分别为9宫格位置，例如1左上，9右下，3右上 */
 static const Rule rules[] = {
-    /* class                 instance              title             tags mask     isfloating  isglobal    isnoborder monitor floatposition */
-    /** 优先级高 越在上面优先度越高 */
-    { NULL,                  NULL,                "图片查看器",      0,            1,          0,          0,        -1,      0}, // qq图片查看器        浮动
-    { NULL,                  NULL,                "图片查看",        0,            1,          0,          0,        -1,      0}, // 微信图片查看器      浮动
+	/* class                 instance              title             tags mask     isfloating  isglobal    isnoborder monitor floatposition */
+	/** 优先级高 越在上面优先度越高 */
+	{ NULL,                  NULL,                "图片查看器",      0,            1,          0,          0,        -1,      0}, // qq图片查看器        浮动
+	{ NULL,                  NULL,                "图片查看",        0,            1,          0,          0,        -1,      0}, // 微信图片查看器      浮动
 
-    /** 普通优先度 */
-    {"obs",                  NULL,                 NULL,             1 << 3,       0,          0,          0,        -1,      0}, // obs        tag -> 󰕧
-    {"chrome",               NULL,                 NULL,             1 << 4,       0,          0,          0,        -1,      0}, // chrome     tag -> 
-    {"Chromium",             NULL,                 NULL,             1 << 4,       0,          0,          0,        -1,      0}, // Chromium   tag -> 
-    {"music",                NULL,                 NULL,             1 << 5,       1,          0,          1,        -1,      0}, // music      tag ->  浮动、无边框
-    { NULL,                 "qq",                  NULL,             1 << 6,       0,          0,          1,        -1,      0}, // qq         tag -> ﬄ 无边框
-    { NULL,                 "wechat.exe",          NULL,             1 << 7,       0,          0,          1,        -1,      0}, // wechat     tag -> ﬐ 无边框
-    { NULL,                 "wxwork.exe",          NULL,             1 << 8,       0,          0,          1,        -1,      0}, // workwechat tag ->  无边框
-    {"Vncviewer",            NULL,                 NULL,             0,            1,          0,          1,        -1,      2}, // Vncviewer           浮动、无边框 屏幕顶部
-    {"flameshot",            NULL,                 NULL,             0,            1,          0,          0,        -1,      0}, // 火焰截图            浮动
-    {"scratchpad",          "scratchpad",         "scratchpad",      TAGMASK,      1,          1,          1,        -1,      2}, // scratchpad          浮动、全局、无边框 屏幕顶部
-    {"Pcmanfm",              NULL,                 NULL,             0,            1,          0,          1,        -1,      3}, // pcmanfm             浮动、无边框 右上角
-    {"wemeetapp",            NULL,                 NULL,             TAGMASK,      1,          1,          0,        -1,      0}, // !!!腾讯会议在切换tag时有诡异bug导致退出 变成global来规避该问题
+	/** 普通优先度 */
+	{"obs",                  NULL,                 NULL,             1 << 8,       0,          0,          0,        -1,      0}, // obs        tag -> 󰕧
+	{ NULL,                 "qq",                  NULL,             1 << 11,      0,          0,          1,        -1,      0}, // qq         tag -> ﬄ 无边框
+	{"Vncviewer",            NULL,                 NULL,             0,            1,          0,          1,        -1,      2}, // Vncviewer           浮动、无边框 屏幕顶部
+	{"flameshot",            NULL,                 NULL,             0,            1,          0,          0,        -1,      0}, // 火焰截图            浮动
+	{"scratchpad",          "scratchpad",         "scratchpad",      TAGMASK,      1,          1,          1,        -1,      2}, // scratchpad          浮动、全局、无边框 屏幕顶部
+	{ "uTools",              NULL,                 NULL,             0,            1,          0,          0,        -1,      0 },
+	{ "Fsearch",             NULL,                 NULL,             0,            1,          0,          0,        -1,      0 },
+	/* { "QQ",               NULL,                 NULL,             1 << 11,      1,          0,          0,        -1,      0 }, */
+	{ "bilibili",            NULL,                 NULL,             1 << 12,      1,          0,          0,        -1,      0 },
+	{ "Steam",               NULL,                 NULL,             1 << 13,      1,          0,          0,        -1,      0 },
+	{ "center-termux",       NULL,                 NULL,             0,            1,          0,          0,        -1,      0 },
+	{ "Microsoft-edge",      NULL,                 NULL,             1 << 9,       0,          0,          0,        -1,      0 },
+	{ "netease-cloud-music", NULL,                 NULL,             1 << 10,      0,          0,          0,        -1,      0 },
 
-    /** 部分特殊class的规则 */
-    {"float",                NULL,                 NULL,             0,            1,          0,          0,        -1,      0}, // class = float       浮动
-    {"global",               NULL,                 NULL,             TAGMASK,      0,          1,          0,        -1,      0}, // class = gloabl      全局
-    {"noborder",             NULL,                 NULL,             0,            0,          0,          1,        -1,      0}, // class = noborder    无边框
-    {"FGN",                  NULL,                 NULL,             TAGMASK,      1,          1,          1,        -1,      0}, // class = FGN         浮动、全局、无边框
-    {"FG",                   NULL,                 NULL,             TAGMASK,      1,          1,          0,        -1,      0}, // class = FG          浮动、全局
-    {"FN",                   NULL,                 NULL,             0,            1,          0,          1,        -1,      0}, // class = FN          浮动、无边框
-    {"GN",                   NULL,                 NULL,             TAGMASK,      0,          1,          1,        -1,      0}, // CLASS = GN          全局、无边框
+	/** 部分特殊class的规则 */
+	{"float",                NULL,                 NULL,             0,            1,          0,          0,        -1,      0}, // class = float       浮动
+	{"global",               NULL,                 NULL,             TAGMASK,      0,          1,          0,        -1,      0}, // class = gloabl      全局
+	{"noborder",             NULL,                 NULL,             0,            0,          0,          1,        -1,      0}, // class = noborder    无边框
+	{"FGN",                  NULL,                 NULL,             TAGMASK,      1,          1,          1,        -1,      0}, // class = FGN         浮动、全局、无边框
+	{"FG",                   NULL,                 NULL,             TAGMASK,      1,          1,          0,        -1,      0}, // class = FG          浮动、全局
+	{"FN",                   NULL,                 NULL,             0,            1,          0,          1,        -1,      0}, // class = FN          浮动、无边框
+	{"GN",                   NULL,                 NULL,             TAGMASK,      0,          1,          1,        -1,      0}, // CLASS = GN          全局、无边框
 
-    /** 优先度低 越在上面优先度越低 */
-    { NULL,                  NULL,                "crx_",            0,            1,          0,          0,        -1,      0}, // 错误载入时 会有crx_ 浮动
-    { NULL,                  NULL,                "broken",          0,            1,          0,          0,        -1,      0}, // 错误载入时 会有broken 浮动
+	/** 优先度低 越在上面优先度越低 */
+	{ NULL,                  NULL,                "crx_",            0,            1,          0,          0,        -1,      0}, // 错误载入时 会有crx_ 浮动
+	{ NULL,                  NULL,                "broken",          0,            1,          0,          0,        -1,      0}, // 错误载入时 会有broken 浮动
 };
 static const char *overviewtag = "OVERVIEW";
 static const Layout overviewlayout = { "舘",  overview };
 
 /* 自定义布局 */
 static const Layout layouts[] = {
-    { "﬿",  tile },         /* 主次栈 */
-    { "﩯",  magicgrid },    /* 网格 */
+	/* { "﬿",  tile },         /\* 主次栈 *\/ */
+	/* { "﩯",  magicgrid },    /\* 网格 *\/ */
+	{ "Tile",  tile },         /* 主次栈 */
+	{ "Table",  magicgrid },   /* 网格 */
 };
 
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -128,6 +137,7 @@ static Key keys[] = {
 
     { MODKEY,              XK_Tab,          focusstack,       {.i = +1} },               /* super tab          |  本tag内切换聚焦窗口 */
     { MODKEY|ShiftMask,    XK_Tab,          focusstack,       {.i = -1} },               /* super shift tab    |  本tag内切换聚焦窗口 */
+    { MODKEY|ControlMask,  XK_Tab,          view,             {0} },                     /* super ctrl tab     |  切换tag */
     { MODKEY,              XK_Up,           focusstack,       {.i = -1} },               /* super up           |  本tag内切换聚焦窗口 */
     { MODKEY,              XK_Down,         focusstack,       {.i = +1} },               /* super down         |  本tag内切换聚焦窗口 */
 
@@ -154,8 +164,8 @@ static Key keys[] = {
     { MODKEY,              XK_u,            toggleborder,     {0} },                     /* super u            |  开启/关闭 边框 */
     { MODKEY,              XK_e,            incnmaster,       {.i = +1} },               /* super e            |  改变主工作区窗口数量 (1 2中切换) */
 
-    { MODKEY,              XK_b,            focusmon,         {.i = +1} },               /* super b            |  光标移动到另一个显示器 */
-    { MODKEY|ShiftMask,    XK_b,            tagmon,           {.i = +1} },               /* super shift b      |  将聚焦窗口移动到另一个显示器 */
+    /* { MODKEY,              XK_b,            focusmon,         {.i = +1} },               /\* super b            |  光标移动到另一个显示器 *\/ */
+    /* { MODKEY|ShiftMask,    XK_b,            tagmon,           {.i = +1} },               /\* super shift b      |  将聚焦窗口移动到另一个显示器 *\/ */
 
     { MODKEY,              XK_q,            killclient,       {0} },                     /* super q            |  关闭窗口 */
     { MODKEY|ControlMask,  XK_q,            forcekillclient,  {0} },                     /* super ctrl q       |  强制关闭窗口(处理某些情况下无法销毁的窗口) */
@@ -189,30 +199,46 @@ static Key keys[] = {
 
     /* spawn + SHCMD 执行对应命令(已下部分建议完全自己重新定义) */
     { MODKEY,              XK_s,      togglescratch, SHCMD("st -t scratchpad -c float") },                      /* super s          | 打开scratch终端        */
-    { MODKEY,              XK_Return, spawn, SHCMD("st") },                                                     /* super enter      | 打开st终端             */
-    { MODKEY,              XK_minus,  spawn, SHCMD("st -c FG") },                                               /* super +          | 打开全局st终端         */
+    { MODKEY,              XK_Return, spawn, SHCMD("konsole") },                                                /* super enter      | 打开终端             */
+    { MODKEY,              XK_minus,  spawn, SHCMD("st -c FG") },                                               /* super -          | 打开全局st终端         */
     { MODKEY,              XK_space,  spawn, SHCMD("st -c float") },                                            /* super space      | 打开浮动st终端         */
-    { MODKEY,              XK_F1,     spawn, SHCMD("killall pcmanfm || pcmanfm") },                             /* super F1         | 打开/关闭pcmanfm       */
-    { MODKEY,              XK_d,      spawn, SHCMD("rofi -show run") },                                         /* super d          | rofi: 执行run          */
-    { MODKEY,              XK_p,      spawn, SHCMD("$DWM/DEF/rofi.sh") },                                       /* super p          | rofi: 执行自定义脚本   */
-    { MODKEY,              XK_n,      spawn, SHCMD("$DWM/DEF/blurlock.sh") },                                   /* super n          | 锁定屏幕               */
-    { MODKEY|ShiftMask,    XK_Up,     spawn, SHCMD("$DWM/DEF/set_vol.sh up") },                                 /* super shift up   | 音量加                 */
-    { MODKEY|ShiftMask,    XK_Down,   spawn, SHCMD("$DWM/DEF/set_vol.sh down") },                               /* super shift down | 音量减                 */
-    { MODKEY|ShiftMask,    XK_a,      spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots") },             /* super shift a    | 截图                   */
+    { MODKEY,              XK_d,      spawn, SHCMD("rofi -show drun") },                                        /* super d         | rofi: 执行run          */
+    /* { MODKEY|ShiftMask,    XK_p,      spawn, SHCMD("$DWM/DEF/rofi.sh") },                                       /\* super shift p    | rofi: 执行自定义脚本   *\/ */
+    /* { MODKEY,              XK_n,      spawn, SHCMD("$DWM/DEF/blurlock.sh") },                                   /\* super n          | 锁定屏幕               *\/ */
+    /* { MODKEY|ShiftMask,    XK_Up,     spawn, SHCMD("$DWM/DEF/set_vol.sh up") },                                 /\* super shift up   | 音量加                 *\/ */
+    /* { MODKEY|ShiftMask,    XK_Down,   spawn, SHCMD("$DWM/DEF/set_vol.sh down") },                               /\* super shift down | 音量减                 *\/ */
     { MODKEY|ShiftMask,    XK_q,      spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") }, /* super shift q    | 选中某个窗口并强制kill */
+    /* { MODKEY,              XK_Return, spawn, SHCMD("st") },                                                     /\* super enter      | 打开st终端             *\/ */
+    /* { MODKEY,              XK_F1,     spawn, SHCMD("killall pcmanfm || pcmanfm") },                             /\* super F1         | 打开/关闭pcmanfm       *\/ */
+    /* { MODKEY|ShiftMask,    XK_a,      spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots") },             /\* super shift a    | 截图                   *\/ */
+    { MODKEY,              XK_p,      spawn, SHCMD("spectacle") },
+    { Mod1Mask,            XK_F7,     spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%") },
+    { Mod1Mask,            XK_F8,     spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%") },
+    { MODKEY|ControlMask,  XK_Return, spawn, SHCMD("dolphin") },
+    { MODKEY,              XK_x,      spawn, SHCMD("emacs /home/Chglish/.emacs.d/org-files/GTD.org") },
+    { MODKEY,              XK_z,      spawn, SHCMD("emacs /tmp/tmpfile.org") },
+    { MODKEY|ShiftMask,    XK_z,      spawn, SHCMD("alacritty --class editor-nvim -e nvim /tmp/tmpfile.txt") },
+    { MODKEY|Mod1Mask,     XK_Return, spawn, SHCMD("alacritty --class center-termux") },
+    { Mod1Mask,            XK_F11,    spawn, SHCMD("transset-df 1") },
+    { Mod1Mask,            XK_F12,    spawn, SHCMD("transset-df 0.9999999") },
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */
     /* super shift key : 将聚焦窗口移动到对应tag */
     /* key tag cmd */
-    TAGKEYS(XK_1, 0, 0)
-    TAGKEYS(XK_2, 1, 0)
-    TAGKEYS(XK_3, 2, 0)
-    TAGKEYS(XK_9, 3, "obs")
-    TAGKEYS(XK_c, 4, "google-chrome-stable")
-    TAGKEYS(XK_m, 5, "~/scripts/music_player.sh")
-    TAGKEYS(XK_0, 6, "linuxqq")
-    TAGKEYS(XK_w, 7, "/opt/apps/com.qq.weixin.deepin/files/run.sh")
-    TAGKEYS(XK_y, 8, "/opt/apps/com.qq.weixin.work.deepin/files/run.sh")
+    TAGKEYS(XK_1, 0,  0)
+    TAGKEYS(XK_2, 1,  0)
+    TAGKEYS(XK_3, 2,  0)
+    TAGKEYS(XK_4, 3,  0)
+    TAGKEYS(XK_5, 4,  0)
+    TAGKEYS(XK_6, 5,  0)
+    TAGKEYS(XK_7, 6,  0)
+    TAGKEYS(XK_8, 7,  0)
+    TAGKEYS(XK_9, 8,  "obs")
+    TAGKEYS(XK_c, 9,  "microsoft-edge-stable")
+    TAGKEYS(XK_m, 10, "netease-cloud-music")
+    TAGKEYS(XK_0, 11, "linuxqq")
+    TAGKEYS(XK_b, 12, 0)
+    TAGKEYS(XK_n, 13, 0)
 };
 
 static Button buttons[] = {
