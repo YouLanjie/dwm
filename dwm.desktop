@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=dwm
+Comment=A Very Simple Windows Manger
+Exec=dwm
+Type=Application
