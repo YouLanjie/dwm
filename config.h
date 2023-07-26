@@ -221,6 +221,7 @@ static Key keys[] = {
     { MODKEY|Mod1Mask,     XK_Return, spawn, SHCMD("alacritty --class center-termux") },
     { Mod1Mask,            XK_F11,    spawn, SHCMD("transset-df 1") },
     { Mod1Mask,            XK_F12,    spawn, SHCMD("transset-df 0.9999999") },
+    { MODKEY,              XK_F1,     spawn, SHCMD("zsh -c ~/.local/share/dwm/Chinese_Input.sh") },
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */
     /* super shift key : 将聚焦窗口移动到对应tag */
