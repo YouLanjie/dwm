@@ -39,8 +39,8 @@ static const unsigned int alphas[][3]    = {          /* 透明度设置 ColFg, 
     [SchemeSelGlobal] = { OPAQUE, baralpha, borderalpha },
     [SchemeNormTag] = { OPAQUE, baralpha, borderalpha }, 
     [SchemeSelTag] = { OPAQUE, baralpha, borderalpha },
-    [SchemeBarEmpty] = { NULL, 0x11, NULL },
-    [SchemeStatusText] = { OPAQUE, 0x88, NULL },
+    [SchemeBarEmpty] = { (int)NULL, 0x11, (int)NULL },
+    [SchemeStatusText] = { OPAQUE, 0x88, (int)NULL },
 };
 
 /* 自定义脚本位置 */
@@ -54,21 +54,20 @@ static const char scratchpadname[] = "scratchpad";
 /* 自定义特定实例的显示状态 */
 //            ﮸  ﭮ 切
 static const char *tags[] = { 
-	"Term",
-	/* "", // tag:0  key:1  desc:terminal1 */
-	"", // tag:1  key:2  desc:terminal2
-	"", // tag:2  key:3  desc:terminal3
-	"", // tag:3  key:4  desc:terminal3
-	"", // tag:4  key:5  desc:terminal3
-	"", // tag:5  key:6  desc:terminal3
-	"", // tag:6  key:7  desc:terminal3
-	"", // tag:7  key:8  desc:terminal3
-	"󰕧", // tag:8  key:9  desc:obs
-	"", // tag:9  key:c  desc:edge
-	"", // tag:10  key:m  desc:music
-	"QQ", // tag:11  key:0  desc:qq
-	"﬐", // tag:12  key:b  desc:bilibili
-	"", // tag:13  key:l  desc:steam
+	"T1", // tag:1  key:1  desc:terminal1
+	"T2", // tag:2  key:2  desc:terminal2
+	"T3", // tag:3  key:3  desc:terminal3
+	"T4", // tag:4  key:4  desc:terminal3
+	"T5", // tag:5  key:5  desc:terminal3
+	"T6", // tag:6  key:6  desc:terminal3
+	"T7", // tag:7  key:7  desc:terminal3
+	"T8", // tag:8  key:8  desc:terminal3
+	"Obs", // tag:9  key:9  desc:obs
+	"Edge", // tag:10  key:c  desc:edge
+	"Music", // tag:11  key:m  desc:music
+	"QQ", // tag:12  key:0  desc:qq
+	"BL", // tag:13  key:b  desc:bilibili
+	"Steam", // tag:14  key:n  desc:steam
 };
 
 /* 自定义窗口显示规则 */
@@ -92,10 +91,12 @@ static const Rule rules[] = {
 	{"flameshot",            NULL,                 NULL,             0,            1,          0,          0,        -1,      0}, // 火焰截图            浮动
 	{"scratchpad",          "scratchpad",         "scratchpad",      TAGMASK,      1,          1,          1,        -1,      2}, // scratchpad          浮动、全局、无边框 屏幕顶部
 	{ "uTools",              NULL,                 NULL,             0,            1,          0,          0,        -1,      0 },
+	{ "spectacle",           NULL,                 NULL,             0,            1,          0,          0,        -1,      0 },
 	{ "Fsearch",             NULL,                 NULL,             0,            1,          0,          0,        -1,      0 },
 	/* { "QQ",               NULL,                 NULL,             1 << 11,      1,          0,          0,        -1,      0 }, */
 	{ "bilibili",            NULL,                 NULL,             1 << 12,      1,          0,          0,        -1,      0 },
-	{ "Steam",               NULL,                 NULL,             1 << 13,      1,          0,          0,        -1,      0 },
+	{ "steam",               NULL,                 NULL,             1 << 13,      1,          0,          0,        -1,      0 },
+	{ "zenity",              NULL,                 NULL,             0,            1,          0,          0,        -1,      0 },
 	{ "center-termux",       NULL,                 NULL,             0,            1,          0,          0,        -1,      0 },
 	{ "Microsoft-edge",      NULL,                 NULL,             1 << 9,       0,          0,          0,        -1,      0 },
 	{ "netease-cloud-music", NULL,                 NULL,             1 << 10,      0,          0,          0,        -1,      0 },
@@ -222,6 +223,7 @@ static Key keys[] = {
     { Mod1Mask,            XK_F11,    spawn, SHCMD("transset-df 1") },
     { Mod1Mask,            XK_F12,    spawn, SHCMD("transset-df 0.9999999") },
     { MODKEY,              XK_F1,     spawn, SHCMD("zsh -c ~/.local/share/dwm/Chinese_Input.sh") },
+    { MODKEY|ControlMask,  XK_F11,    spawn, SHCMD("zsh -c ~/.local/share/dwm/shutdown.sh || shutdown -h now") },                     /* super ctrl f11     |  退出system */
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */
     /* super shift key : 将聚焦窗口移动到对应tag */
@@ -236,10 +238,10 @@ static Key keys[] = {
     TAGKEYS(XK_8, 7,  0)
     TAGKEYS(XK_9, 8,  "obs")
     TAGKEYS(XK_c, 9,  "microsoft-edge-stable")
-    TAGKEYS(XK_m, 10, "netease-cloud-music")
+    TAGKEYS(XK_m, 10, "Qcm")
     TAGKEYS(XK_0, 11, "linuxqq")
     TAGKEYS(XK_b, 12, 0)
-    TAGKEYS(XK_n, 13, 0)
+    TAGKEYS(XK_n, 13, "steam")
 };
 
 static Button buttons[] = {
