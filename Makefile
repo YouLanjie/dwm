@@ -32,6 +32,8 @@ clean:
 	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
 
 install: all
+	mkdir -p ${DESTDIR}/etc/skel/.local/share/
+	cp -r script ${DESTDIR}/etc/skel/.local/share/dwm
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
