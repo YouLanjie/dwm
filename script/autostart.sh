@@ -18,9 +18,9 @@ while (( 1 )) {
 	sleep 0.1
 }&
 
-/mnt/DataDisk/Code/my-test/bin/fork "zsh -c \"while (( 1 )) { feh --randomize --bg-fill ~/图片/Wallpaper/* ;sleep 3m }\""&
+fork "zsh -c \"while (( 1 )) { feh --randomize --bg-fill ~/图片/Wallpaper/* ;sleep 3m }\""&
 
-feh --randomize --bg-fill ~/图片/yuindex_bg/*
+feh --randomize --bg-fill ~/图片/Wallpaper/*
 xsetroot -cursor_name left_ptr
 
 # conky -c ~/.config/conky/conky_leon
