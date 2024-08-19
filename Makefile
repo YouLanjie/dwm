@@ -32,11 +32,13 @@ clean:
 	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
 
 install: all
-	mkdir -p ${DESTDIR}/etc/skel/.local/share/
-	cp -r script ${DESTDIR}/etc/skel/.local/share/dwm
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
+	mkdir -p ${DESTDIR}/etc/skel/.local/share/
+	cp -r script ${DESTDIR}/etc/skel/.local/share/dwm
+	mkdir -p ${DESTDIR}/usr/share/xsessions
+	cp -r dwm.desktop ${DESTDIR}/usr/share/xsessions/
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
