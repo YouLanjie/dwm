@@ -35,7 +35,7 @@ playerctld daemon
 pgrep -x utools > /dev/null || nohup utools >/dev/null &
 
 # klipper
-# pgrep -x klipper > /dev/null || nohup klipper 2>&1 >/dev/null &
+pgrep -x klipper > /dev/null || copyq --start-server
 
 # 通知
 nohup dunst >> /dev/null &
