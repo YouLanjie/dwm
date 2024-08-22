@@ -213,6 +213,9 @@ static Key keys[] = {
     /* { MODKEY,              XK_F1,     spawn, SHCMD("killall pcmanfm || pcmanfm") },                             /\* super F1         | 打开/关闭pcmanfm       *\/ */
     /* { MODKEY|ShiftMask,    XK_a,      spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots") },             /\* super shift a    | 截图                   *\/ */
     { MODKEY,              XK_p,      spawn, SHCMD("spectacle") },
+    { Mod1Mask,            XK_F1,     spawn, SHCMD("playerctl previous") },
+    { Mod1Mask,            XK_F2,     spawn, SHCMD("playerctl play-pause") },
+    { Mod1Mask,            XK_F3,     spawn, SHCMD("playerctl next") },
     { Mod1Mask,            XK_F7,     spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%") },
     { Mod1Mask,            XK_F8,     spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%") },
     { MODKEY|ControlMask,  XK_Return, spawn, SHCMD("dolphin") },
