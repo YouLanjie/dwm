@@ -35,11 +35,13 @@ playerctld daemon
 pgrep -x utools > /dev/null || nohup utools >/dev/null &
 
 # klipper
-pgrep -x klipper > /dev/null || nohup klipper 2>&1 >/dev/null &
+# pgrep -x klipper > /dev/null || nohup klipper 2>&1 >/dev/null &
 
 # 通知
 nohup dunst >> /dev/null &
 
+# 启动kdeconnect服务
+pgrep -x kdeconnectd > /dev/null || nohup kdeconnectd 2>&1 >/dev/null &
 # 启动kdeconnect启动器
 pgrep -x kdeconnect-indicator > /dev/null || nohup kdeconnect-indicator 2>&1 >/dev/null &
 
