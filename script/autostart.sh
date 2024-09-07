@@ -13,40 +13,45 @@
 while (( 1 )) {
 	# 设置标题
 	xsetroot -name "^c#4B005B^^b#7799AA0x99^ Vol:`pactl get-sink-volume @DEFAULT_SINK@ |awk '{print $5}'|sed -n "1p"` ^c#4B005B^^b#7E51680x99^ `date '+%Y年%m月%d日 %a %H:%M:%S'` "
-	# 更新kde的应用程序打开方式
-	XDG_MENU_PREFIX=plasma- kbuildsycoca6
-	sleep 0.1
 }&
 
-fork "zsh -c \"while (( 1 )) { feh --randomize --bg-fill ~/图片/Wallpaper/* ;sleep 3m }\""&
+if [[ $wallpaper_path == "" ]] export wallpaper_path="$HOME/图片/Wallpaper"
 
-feh --randomize --bg-fill ~/图片/Wallpaper/*
+if [[ -f $wallpaper_path/wallpaper_set.jpg || -f $wallpaper_path/wallpaper_set.png ]] {
+	feh --bg-fill $wallpaper_path/wallpaper_set.jpg
+	feh --bg-fill $wallpaper_path/wallpaper_set.png
+} else {
+	feh --randomize --bg-fill $wallpaper_path/*
+	fork "zsh -c \"while (( 1 )) { feh --randomize --bg-fill $wallpaper_path/* ;sleep 3m }\""&
+}
+
 xsetroot -cursor_name left_ptr
+setxkbmap -option 'caps:ctrl_modifier'
 
-# conky -c ~/.config/conky/conky_leon
+#########
+#  app  #
+#########
 
-# 启动picom
-pgrep -x picom > /dev/null || picom -b
-
-# 启动playerctld
+# conky
+#conky -c ~/.config/conky/conky_leon
+# picom窗口特效合成器（主要是窗口透明）
+picom -b
+# 启动playerctld（多媒体控制服务）
 playerctld daemon
-
-# 启动utools
-pgrep -x utools > /dev/null || nohup utools >/dev/null &
-
-# klipper
-pgrep -x klipper > /dev/null || copyq --start-server
-
+# utools
+pgrep -u "$USER" -x utools > /dev/null || nohup utools >/dev/null &
+# 剪切板管理器
+copyq --start-server
 # 通知
 nohup dunst >> /dev/null &
-
 # 启动kdeconnect服务
-pgrep -x kdeconnectd > /dev/null || nohup kdeconnectd 2>&1 >/dev/null &
-# 启动kdeconnect启动器
-pgrep -x kdeconnect-indicator > /dev/null || nohup kdeconnect-indicator 2>&1 >/dev/null &
-
-# 启动polkit-kde-authentication-agent
+nohup kdeconnectd 2>&1 >/dev/null &
+# kdeconnect监视
+nohup kdeconnect-indicator 2>&1 >/dev/null &
+# kde身份认证
 nohup /usr/lib/polkit-kde-authentication-agent-1 2>&1 >/dev/null &
+# 输入法
+fcitx5 &
+# 更新kde的应用程序打开方式
+while (( 1 )) { XDG_MENU_PREFIX=plasma- kbuildsycoca6 ;sleep 1 }&
 
-setxkbmap -option 'caps:ctrl_modifier'
-fcitx5
