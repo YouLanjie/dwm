@@ -1,0 +1,39 @@
+# Maintainer: Chglish
+pkgname=local-dwm
+pkgver=6.3
+pkgrel=5
+epoch=
+pkgdesc="Dwm - 轻量级桌面管理器"
+arch=('x86_64' 'i686')
+url="https://github.com/youlanjie/dwm"
+license=('MIT')
+groups=("local-built")
+depends=('libx11' 'libxinerama' 'libxft' 'local-fork')
+makedepends=('git' 'gcc' 'make' 'glibc')
+checkdepends=()
+optdepends=('zsh: 默认脚本依赖'
+	    'feh: 设置壁纸'
+	    'dunst: 通知'
+	    'copyq: 剪贴板管理器'
+	    'playerctl: 多媒体控制')
+provides=(dwm)
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("dwm::git+https://github.com/youlanjie/dwm.git")
+noextract=()
+sha256sums=('SKIP')
+validpgpkeys=()
+
+build() {
+	cd "dwm"
+	make
+}
+
+package() {
+	cd "dwm"
+	make DESTDIR="$pkgdir/" install
+}
