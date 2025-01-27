@@ -1,18 +1,17 @@
 # Maintainer: Chglish
 pkgname=local-dwm
 pkgver=6.3
-pkgrel=5
+pkgrel=7
 epoch=
 pkgdesc="Dwm - 轻量级桌面管理器"
 arch=('x86_64' 'i686')
 url="https://github.com/youlanjie/dwm"
 license=('MIT')
 groups=("local-built")
-depends=('libx11' 'libxinerama' 'libxft' 'local-fork')
+depends=('libx11' 'libxinerama' 'libxft' 'zsh')
 makedepends=('git' 'gcc' 'make' 'glibc')
 checkdepends=()
-optdepends=('zsh: 默认脚本依赖'
-	    'feh: 设置壁纸'
+optdepends=('feh: 设置壁纸'
 	    'dunst: 通知'
 	    'copyq: 剪贴板管理器'
 	    'playerctl: 多媒体控制')
