@@ -18,7 +18,7 @@ while (( 1 )) {
 
 if [[ $wallpaper_path == "" ]] export wallpaper_path="$HOME/Pictures/Wallpaper"
 
-nohup zsh -c "
+zsh -c "
 while (( 1 )) {
 	if [[ -f $wallpaper_path/wallpaper_set.jpg || -f $wallpaper_path/wallpaper_set.png ]] {
 		feh --bg-fill $wallpaper_path/wallpaper_set.jpg
@@ -29,7 +29,7 @@ while (( 1 )) {
 	}
 	sleep 1m
 }
-" 2>&1 >/dev/null
+" 2>&1 >/dev/null &
 
 xsetroot -cursor_name left_ptr
 setxkbmap -option 'caps:ctrl_modifier'
