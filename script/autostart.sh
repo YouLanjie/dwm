@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/bash
 
 #================================================================
 #   Copyright (C) 2023 YouLanjie
@@ -10,26 +10,29 @@
 #
 #================================================================
 
-while (( 1 )) {
+hostname=$(cat /etc/hostname)
+while [[ $(ps "$$" >/dev/null && echo $?) == 0 ]] ; do
 	# 设置标题
-	xsetroot -name "^c#4B005B^^b#7799AA0x99^ Vol:`pactl get-sink-volume @DEFAULT_SINK@ |awk '{print $5}'|sed -n "1p"` ^c#4B005B^^b#7E51680x99^ `date '+%Y年%m月%d日 %a %H:%M:%S'` "
-	sleep 0.5
-}&
+	# "前景色: ^c#FFFFFF^"
+	# "背景色: ^b#000000^"
+	xsetroot -name "^c#000000^^b#F61717^ $hostname ^b#1bf617^ `pactl get-sink-volume @DEFAULT_SINK@ |awk '{print $5}'|sed -n "1p"` ^b#1D8CEC^ `date '+%Y/%m/%d %a %H:%M:%S'` "
+	sleep 0.3
+done &
 
-if [[ $wallpaper_path == "" ]] export wallpaper_path="$HOME/Pictures/Wallpaper"
+if [[ $wallpaper_path == "" ]]; then
+	export wallpaper_path="$HOME/Pictures/Wallpaper"
+fi
 
-zsh -c "
-while (( 1 )) {
-	if [[ -f $wallpaper_path/wallpaper_set.jpg || -f $wallpaper_path/wallpaper_set.png ]] {
+while [[ $(ps "$$" >/dev/null && echo $?) == 0 ]]; do
+	if [[ -f $wallpaper_path/wallpaper_set.jpg || -f $wallpaper_path/wallpaper_set.png ]]; then
 		feh --bg-fill $wallpaper_path/wallpaper_set.jpg
 		feh --bg-fill $wallpaper_path/wallpaper_set.png
-	} else {
+	else
 		feh --randomize --bg-fill $wallpaper_path/*
 		sleep 2m
-	}
+	fi
 	sleep 1m
-}
-" 2>&1 >/dev/null &
+done &
 
 xsetroot -cursor_name left_ptr
 setxkbmap -option 'caps:ctrl_modifier'
@@ -38,26 +41,27 @@ setxkbmap -option 'caps:ctrl_modifier'
 #  app  #
 #########
 
-# conky
-#conky -c ~/.config/conky/conky_leon
 # picom窗口特效合成器（主要是窗口透明）
 picom -b &
 # 启动playerctld（多媒体控制服务）
 playerctld daemon &
 # utools
-pgrep -u "$USER" -x utools > /dev/null || nohup utools >/dev/null &
+pgrep -u "$USER" -x utools > /dev/null || utools &
 # 剪切板管理器
 copyq --start-server &
 # 通知
-nohup dunst >> /dev/null &
+dunst >> /dev/null &
 # 启动kdeconnect服务
-nohup kdeconnectd 2>&1 >/dev/null &
+# kdeconnectd 2>&1 >/dev/null &
 # kdeconnect监视
-nohup kdeconnect-indicator 2>&1 >/dev/null &
+# kdeconnect-indicator 2>&1 >/dev/null &
 # kde身份认证
-nohup /usr/lib/polkit-kde-authentication-agent-1 2>&1 >/dev/null &
+/usr/lib/polkit-kde-authentication-agent-1 &
 # 输入法
 fcitx5 &
 # 更新kde的应用程序打开方式
-while (( 1 )) { XDG_MENU_PREFIX=plasma- kbuildsycoca6 ;sleep 2 }&
+while [[ $(ps "$$" >/dev/null && echo $?) == 0 ]]; do
+	XDG_MENU_PREFIX=plasma- kbuildsycoca6
+	sleep 2
+done
 
