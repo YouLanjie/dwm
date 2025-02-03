@@ -1,7 +1,7 @@
 # Maintainer: Chglish
 pkgname=local-dwm
 pkgver=6.3.1
-pkgrel=1
+pkgrel=2
 epoch=
 pkgdesc="Dwm - 轻量级桌面管理器"
 arch=('x86_64' 'i686')

@@ -15,7 +15,7 @@ while [[ $(ps "$$" >/dev/null && echo $?) == 0 ]] ; do
 	# 设置标题
 	# "前景色: ^c#FFFFFF^"
 	# "背景色: ^b#000000^"
-	xsetroot -name "^c#000000^^b#F61717^ $hostname ^b#1bf617^ `pactl get-sink-volume @DEFAULT_SINK@ |awk '{print $5}'|sed -n "1p"` ^b#1D8CEC^ `date '+%Y/%m/%d %a %H:%M:%S'` "
+	xsetroot -name "^c#000000^^b#F61717^ $(whoami)@$hostname ^b#1bf617^ `pactl get-sink-volume @DEFAULT_SINK@ |awk '{print $5}'|sed -n "1p"` ^b#1D8CEC^ `date '+%Y/%m/%d %a %H:%M:%S'` "
 	sleep 0.3
 done &
 
