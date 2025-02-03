@@ -2282,8 +2282,8 @@ run(void)
 
 void
 runAutostart(void) {
-    char cmd [100];
-    sprintf(cmd, "%s &", autostartscript);
+    char cmd [500] = "ls";
+    sprintf(cmd, "(%s || %s)&", autostartscript, autostartscript_backup);
     system(cmd);
 }
 

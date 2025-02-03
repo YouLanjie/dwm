@@ -2,6 +2,7 @@
 
 static int showsystray                   = 1;         /* 是否显示托盘栏 */
 static const int newclientathead         = 0;         /* 定义新窗口在栈顶还是栈底 */
+static const int managetransientwin      = 1;         /* 是否管理临时窗口 */
 static const unsigned int borderpx       = 2;         /* 窗口边框大小 */
 static const unsigned int systraypinning = 1;         /* 托盘跟随的显示器 0代表不指定显示器 */
 static const unsigned int systrayspacing = 1;         /* 托盘间距 */
@@ -39,13 +40,14 @@ static const unsigned int alphas[][3]    = {          /* 透明度设置 ColFg, 
     [SchemeSelGlobal] = { OPAQUE, baralpha, borderalpha },
     [SchemeNormTag] = { OPAQUE, baralpha, borderalpha }, 
     [SchemeSelTag] = { OPAQUE, baralpha, borderalpha },
-    [SchemeBarEmpty] = { (int)NULL, 0x11, (int)NULL },
-    [SchemeStatusText] = { OPAQUE, 0x88, (int)NULL },
+    [SchemeBarEmpty] = { 0, 0x11, 0 },
+    [SchemeStatusText] = { OPAQUE, 0x88, 0 },
 };
 
 /* 自定义脚本位置 */
-static const char *autostartscript = "~/.local/share/dwm/autostart.sh";
-static const char *statusbarscript = "$DWM/statusbar/statusbar.sh";
+static const char *autostartscript_backup = "/usr/share/dwm/autostart.sh";
+static const char *autostartscript = "$HOME/.local/share/dwm/autostart.sh";
+static const char *statusbarscript = "$HOME/.local/share/dwm/statusbar.sh";
 
 /* 自定义 scratchpad instance */
 static const char scratchpadname[] = "scratchpad";
@@ -114,13 +116,9 @@ static const Rule rules[] = {
 	{ NULL,                  NULL,                "crx_",            0,            1,          0,          0,        -1,      0}, // 错误载入时 会有crx_ 浮动
 	{ NULL,                  NULL,                "broken",          0,            1,          0,          0,        -1,      0}, // 错误载入时 会有broken 浮动
 };
-static const char *overviewtag = "OVERVIEW";
-static const Layout overviewlayout = { "舘",  overview };
 
 /* 自定义布局 */
 static const Layout layouts[] = {
-	/* { "﬿",  tile },         /\* 主次栈 *\/ */
-	/* { "﩯",  magicgrid },    /\* 网格 *\/ */
 	{ "Tile",  tile },         /* 主次栈 */
 	{ "Table",  magicgrid },   /* 网格 */
 };
@@ -138,7 +136,6 @@ static Key keys[] = {
 
     { MODKEY,              XK_Tab,          focusstack,       {.i = +1} },               /* super tab          |  本tag内切换聚焦窗口 */
     { MODKEY|ShiftMask,    XK_Tab,          focusstack,       {.i = -1} },               /* super shift tab    |  本tag内切换聚焦窗口 */
-    { MODKEY|ControlMask,  XK_Tab,          view,             {0} },                     /* super ctrl tab     |  切换tag */
     { MODKEY,              XK_Up,           focusstack,       {.i = -1} },               /* super up           |  本tag内切换聚焦窗口 */
     { MODKEY,              XK_Down,         focusstack,       {.i = +1} },               /* super down         |  本tag内切换聚焦窗口 */
 
@@ -147,7 +144,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,    XK_Left,         tagtoleft,        {0} },                     /* super shift left   |  将本窗口移动到左边tag */
     { MODKEY|ShiftMask,    XK_Right,        tagtoright,       {0} },                     /* super shift right  |  将本窗口移动到右边tag */
 
-    { MODKEY,              XK_a,            toggleoverview,   {0} },                     /* super a            |  显示所有tag 或 跳转到聚焦窗口的tag */
+    { MODKEY,              XK_a,            previewallwin,    {0} },                     /* super a            |  overview */
 
     { MODKEY,              XK_comma,        setmfact,         {.f = -0.05} },            /* super ,            |  缩小主工作区 */
     { MODKEY,              XK_period,       setmfact,         {.f = +0.05} },            /* super .            |  放大主工作区 */
@@ -219,14 +216,14 @@ static Key keys[] = {
     { Mod1Mask,            XK_F7,     spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5%") },
     { Mod1Mask,            XK_F8,     spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5%") },
     { MODKEY|ControlMask,  XK_Return, spawn, SHCMD("dolphin") },
-    { MODKEY,              XK_x,      spawn, SHCMD("emacs /home/Chglish/.emacs.d/org-files/GTD.org") },
+    { MODKEY,              XK_x,      spawn, SHCMD("emacs $HOME/.emacs.d/org-files/GTD.org") },
     { MODKEY,              XK_z,      spawn, SHCMD("emacs /tmp/tmpfile.org") },
     { MODKEY|ShiftMask,    XK_z,      spawn, SHCMD("alacritty --class editor-nvim -e nvim /tmp/tmpfile.txt") },
     { MODKEY|Mod1Mask,     XK_Return, spawn, SHCMD("alacritty --class center-termux") },
     { Mod1Mask,            XK_F11,    spawn, SHCMD("transset-df 1") },
     { Mod1Mask,            XK_F12,    spawn, SHCMD("transset-df 0.9999999") },
-    { MODKEY,              XK_F1,     spawn, SHCMD("zsh -c ~/.local/share/dwm/Chinese_Input.sh") },
-    { MODKEY|ControlMask,  XK_F11,    spawn, SHCMD("zsh -c ~/.local/share/dwm/shutdown.sh || shutdown -h now") },                     /* super ctrl f11     |  退出system */
+    { MODKEY,              XK_F1,     spawn, SHCMD("bash -c $HOME/.local/share/dwm/Chinese_Input.sh || bash -c /usr/share/dwm/Chinese_Input.sh") },
+    { MODKEY|ControlMask,  XK_F11,    spawn, SHCMD("bash -c $HOME/.local/share/dwm/shutdown.sh || shutdown -h now") },                     /* super ctrl f11     |  退出system */
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */
     /* super shift key : 将聚焦窗口移动到对应tag */
@@ -269,6 +266,6 @@ static Button buttons[] = {
     { ClkStatusText,       0,               Button5,          clickstatusbar,{0} },                                   // 鼠标滚轮下  |  状态栏       |  根据状态栏的信号执行 ~/scripts/dwmstatusbar.sh $signal D
                                                                                                                       //
     /* 点击bar空白处 */
-    { ClkBarEmpty,         0,               Button1,          spawn, SHCMD("~/scripts/call_rofi.sh window") },        // 左键        |  bar空白处    |  rofi 执行 window
-    { ClkBarEmpty,         0,               Button3,          spawn, SHCMD("~/scripts/call_rofi.sh drun") },          // 右键        |  bar空白处    |  rofi 执行 drun
+    //{ ClkBarEmpty,         0,               Button1,          spawn, SHCMD("~/scripts/call_rofi.sh window") },        // 左键        |  bar空白处    |  rofi 执行 window
+    //{ ClkBarEmpty,         0,               Button3,          spawn, SHCMD("~/scripts/call_rofi.sh drun") },          // 右键        |  bar空白处    |  rofi 执行 drun
 };

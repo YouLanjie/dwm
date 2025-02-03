@@ -35,8 +35,8 @@ install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
-	mkdir -p ${DESTDIR}/etc/skel/.local/share/
-	cp -r script ${DESTDIR}/etc/skel/.local/share/dwm
+	mkdir -p ${DESTDIR}/usr/share/
+	cp -r script ${DESTDIR}/usr/share/dwm
 	mkdir -p ${DESTDIR}/usr/share/xsessions
 	cp -r dwm.desktop ${DESTDIR}/usr/share/xsessions/
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
