@@ -1,7 +1,7 @@
 # Maintainer: Chglish
 pkgname=local-dwm
 pkgver=6.3.1
-pkgrel=3
+pkgrel=4
 epoch=
 pkgdesc="Dwm - 轻量级桌面管理器"
 arch=('x86_64' 'i686')
@@ -12,7 +12,9 @@ depends=('libx11' 'libxinerama' 'libxft')
 makedepends=('git' 'gcc' 'make' 'glibc')
 checkdepends=()
 optdepends=('feh: 设置壁纸'
-	    'dunst: 通知'
+	    'dunst: 通知服务'
+	    'libnotify: 发送通知'
+	    'scrot: 截图'
 	    'zenity: 中文输入窗口'
 	    'xdotool: 中文输入控制'
 	    'copyq: 剪贴板管理器'
@@ -21,8 +23,8 @@ optdepends=('feh: 设置壁纸'
 	    'utools: 脚本调用'
 	    'playerctl: 多媒体控制'
 	    'fcitx5: 输入法'
-	    'kservice: 脚本调用'
-	    'polkit-kde-agent: 脚本调用')
+	    'kservice: 构建menu缓存'
+	    'polkit-kde-agent: 身份验证服务')
 provides=(dwm)
 conflicts=()
 replaces=()

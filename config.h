@@ -203,7 +203,7 @@ static Key keys[] = {
     { MODKEY,              XK_space,  spawn, SHCMD("st -c float") },                                            /* super space      | 打开浮动st终端         */
     { MODKEY,              XK_d,      spawn, SHCMD("rofi -show drun") },                                        /* super d         | rofi: 执行run          */
     { MODKEY|ShiftMask,    XK_q,      spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") }, /* super shift q    | 选中某个窗口并强制kill */
-    { MODKEY,              XK_p,      spawn, SHCMD("bash -c 'cd $HOME/Pictures/本地/屏幕截图/;scrot'") },
+    { MODKEY,              XK_p,      spawn, SHCMD("bash -c 'cd $HOME/Pictures/本地/屏幕截图/;scrot;notify-send \"Scrot\" \"截图完成\" -r 1 -t 700'") },
     { MODKEY|ShiftMask,    XK_p,      spawn, SHCMD("spectacle") },
     { Mod1Mask,            XK_F1,     spawn, SHCMD("playerctl previous") },
     { Mod1Mask,            XK_F2,     spawn, SHCMD("playerctl play-pause") },
