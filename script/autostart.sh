@@ -42,7 +42,10 @@ setxkbmap -option 'caps:ctrl_modifier'
 #########
 
 # picom窗口特效合成器（主要是窗口透明）
-picom -b &
+# 只考虑在非虚拟机环境下运行
+if [[ $(systemd-detect-virt) == "none" ]]; then
+	picom -b &
+fi
 # 启动playerctld（多媒体控制服务）
 playerctld daemon &
 # utools
