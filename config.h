@@ -152,7 +152,7 @@ static Key keys[] = {
     { MODKEY,              XK_i,            hidewin,          {0} },                     /* super i            |  隐藏 窗口 */
     { MODKEY|ShiftMask,    XK_i,            restorewin,       {0} },                     /* super shift i      |  取消隐藏 窗口 */
 
-    { MODKEY|ShiftMask,    XK_Return,       zoom,             {0} },                     /* super shift enter  |  将当前聚焦窗口置为主窗口 */
+    //{ MODKEY|ShiftMask,    XK_Return,       zoom,             {0} },                     /* super shift enter  |  将当前聚焦窗口置为主窗口 */
 
     { MODKEY,              XK_t,            togglefloating,   {0} },                     /* super t            |  开启/关闭 聚焦目标的float模式 */
     { MODKEY|ShiftMask,    XK_t,            toggleallfloating,{0} },                     /* super shift t      |  开启/关闭 全部目标的float模式 */
@@ -196,13 +196,14 @@ static Key keys[] = {
     { MODKEY|ShiftMask,    XK_l,            exchange_client,  {.i = RIGHT } },           /* super shift l      | 二维交换窗口 (仅平铺) */
 
     /* spawn + SHCMD 执行对应命令(已下部分建议完全自己重新定义) */
-    { MODKEY,              XK_s,      togglescratch, SHCMD("st -t scratchpad -c float") },                      /* super s          | 打开scratch终端        */
-    { MODKEY,              XK_Return, spawn, SHCMD("konsole") },                                                /* super enter      | 打开终端             */
+    { MODKEY,              XK_s,      togglescratch, SHCMD("st -t scratchpad -c float") },                      /* super s           | 打开scratch终端        */
+    { MODKEY,              XK_Return, spawn, SHCMD("alacritty") },                                              /* super enter       | 打开终端(alacritty)    */
+    { MODKEY|ShiftMask,    XK_Return, spawn, SHCMD("konsole") },                                                /* super shift enter | 打开终端(konsole)      */
     { MODKEY|Mod1Mask,     XK_Return, spawn, SHCMD("alacritty --class center-termux") },
-    { MODKEY,              XK_minus,  spawn, SHCMD("st -c FG") },                                               /* super -          | 打开全局st终端         */
-    { MODKEY,              XK_space,  spawn, SHCMD("st -c float") },                                            /* super space      | 打开浮动st终端         */
-    { MODKEY,              XK_d,      spawn, SHCMD("rofi -show drun") },                                        /* super d         | rofi: 执行run          */
-    { MODKEY|ShiftMask,    XK_q,      spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") }, /* super shift q    | 选中某个窗口并强制kill */
+    { MODKEY,              XK_minus,  spawn, SHCMD("st -c FG") },                                               /* super -           | 打开全局st终端         */
+    { MODKEY,              XK_space,  spawn, SHCMD("st -c float") },                                            /* super space       | 打开浮动st终端         */
+    { MODKEY,              XK_d,      spawn, SHCMD("rofi -show drun") },                                        /* super d           | rofi: 执行run          */
+    { MODKEY|ShiftMask,    XK_q,      spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')") }, /* super shift q     | 选中某个窗口并强制kill */
     { MODKEY,              XK_p,      spawn, SHCMD("bash -c 'cd $HOME/Pictures/本地/屏幕截图/;scrot;notify-send \"Scrot\" \"截图完成\" -r 1 -t 700'") },
     { MODKEY|ShiftMask,    XK_p,      spawn, SHCMD("spectacle") },
     { Mod1Mask,            XK_F1,     spawn, SHCMD("playerctl previous") },

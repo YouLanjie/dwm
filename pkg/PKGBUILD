@@ -1,9 +1,9 @@
 # Maintainer: Chglish
 pkgname=local-dwm
 pkgver=6.3.1
-pkgrel=5
+pkgrel=6
 epoch=
-pkgdesc="Dwm - 轻量级桌面管理器"
+pkgdesc="Dwm - 轻量级桌面管理器(x11 only)"
 arch=('x86_64' 'i686')
 url="https://github.com/youlanjie/dwm"
 license=('MIT')
